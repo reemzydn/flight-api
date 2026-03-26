@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flight-api
+  template:
+    metadata:
+      labels:
+        app: flight-api
+    spec:
+      containers:
+      - name: flight-api
+        image: rimzdn/flight-api
+        ports:
+        - containerPort: 5000
