@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: checkin-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: checkin-api
+  template:
+    metadata:
+      labels:
+        app: checkin-api
+    spec:
+      containers:
+      - name: checkin-api
+        image: rimzdn/checkin-api
+        ports:
+        - containerPort: 5001
+        

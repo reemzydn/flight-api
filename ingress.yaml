@@ -8,10 +8,17 @@ spec:
     - host: flight-api.info
       http:
         paths:
-          - path: /
+          - path: /flights
             pathType: Prefix
             backend:
               service:
                 name: flight-api
                 port:
                   number: 5000
+          - path: /checkin
+            pathType: Prefix
+            backend:
+              service:
+                name: checkin-api
+                port:
+                  number: 5001
