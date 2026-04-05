@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 from models import db, Vol
+import threading
+import grpc_server
 
 app = Flask(__name__)
 
@@ -10,6 +12,10 @@ with app.app_context():
     db.create_all()
     
 # flights = []
+
+# Lance le serveur gRPC dans un thread séparé
+grpc_thread = threading.Thread(target=grpc_server.serve, daemon=True)
+grpc_thread.start()
 
 @app.route('/flights', methods=['GET'])
 def get_flights():

@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from models import db, Checkin
+import requests
 
 app = Flask(__name__)
 
@@ -30,6 +31,12 @@ def get_checkin(flight_id):
 @app.route('/checkin', methods=['POST'])
 def add_checkin():
     data = request.get_json()
+    
+    # Vérifier que le vol existe dans flight-api
+    response = requests.get(f'http://flight-api:5000/flights/{data["flight_id"]}')
+    if response.status_code == 404:
+        return jsonify({'Error': 'Vol inexistant.'}), 404
+    
     new = Checkin(
         # id = len(checkins)+1,
         passenger = data['passenger'],

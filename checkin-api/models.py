@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class Checkin(db.Model):
-    __tablename__ = 'checkin'
+    __tablename__ = 'checkins'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     passenger = db.Column(db.String(100), nullable=False)

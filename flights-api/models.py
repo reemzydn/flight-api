@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class Vol(db.Model):
+    # Nom de la table dans la base de données de flight-api
     __tablename__ = 'flights'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -17,6 +18,7 @@ class Vol(db.Model):
     #     self.prices = prices
     #     self.places = places
     
+    # Transformer les données en JSON (le service REST a besoin des données en JSON)
     def to_dict(self):
         return {
             "id": self.id,

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+service FlightService {
+    rpc GetFlights (Empty) returns (FlightList);
+    rpc GetFlight (FlightRequest) returns (FlightResponse);
+}
+
+message Empty {}
+
+message FlightRequest {
+    int32 id = 1;
+}
+
+message FlightResponse {
+    int32 id = 1;
+    string destination = 2;
+    int32 prices = 3;
+    int32 places = 4;
+}
+
+message FlightList {
+    repeated FlightResponse flights = 1;
+}
