@@ -12,8 +12,10 @@ spec:
       labels:
         app: flight-api
     spec:
+      serviceAccountName: flight-api-sa
       containers:
       - name: flight-api
         image: rimzdn/flight-api
         ports:
         - containerPort: 5000
+        - containerPort: 50051

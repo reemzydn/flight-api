@@ -12,9 +12,9 @@ spec:
       labels:
         app: checkin-api
     spec:
+      serviceAccountName: checkin-api-sa
       containers:
       - name: checkin-api
         image: rimzdn/checkin-api
         ports:
         - containerPort: 5001
-        

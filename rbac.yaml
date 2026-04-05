@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flight-api-sa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: flight-api-role
+  namespace: default
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: flight-api-rolebinding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: flight-api-sa
+  namespace: default
+roleRef:
+  kind: Role
+  name: flight-api-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: checkin-api-sa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: checkin-api-role
+  namespace: default
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: checkin-api-rolebinding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: checkin-api-sa
+  namespace: default
+roleRef:
+  kind: Role
+  name: checkin-api-role
+  apiGroup: rbac.authorization.k8s.io

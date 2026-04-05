@@ -91,6 +91,34 @@ curl http://localhost:31380/checkin
 kubectl get pods
 ```
 
+## Sécurisation du cluster
+
+### RBAC
+```bash
+kubectl apply -f rbac.yaml
+kubectl describe pod <nom-pod-flight-api> | findstr "Service Account"
+```
+
+### mTLS Istio
+```bash
+kubectl apply -f mtls.yaml
+```
+
+### Vérifier que mTLS est actif
+```bash
+kubectl get peerauthentication
+```
+
+### Istio Gateway
+```bash
+# Terminal séparé
+kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
+
+# Tester
+curl http://localhost:31380/flights
+curl http://localhost:31380/checkin
+```
+
 ### Les images docker
 Image flight-api : https://hub.docker.com/r/rimzdn/flights-api
 Image checkin-api : https://hub.docker.com/r/rimzdn/checkin-api
