@@ -1,0 +1,41 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: flight-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 8080
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: flight-virtual-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - flight-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /flights
+    route:
+    - destination:
+        host: flight-api
+        port:
+          number: 5000
+  - match:
+    - uri:
+        prefix: /checkin
+    route:
+    - destination:
+        host: checkin-api
+        port:
+          number: 5001

@@ -73,6 +73,24 @@ cd flights-api
 python grpc_client.py
 ```
 
+## Istio Service Mesh
+
+### Port-forward vers l'Istio Ingress Gateway (terminal séparé)
+```bash
+kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
+```
+
+### Tester via Istio
+```bash
+curl http://localhost:31380/flights
+curl http://localhost:31380/checkin
+```
+
+### Vérifier les sidecars injectés (2/2)
+```bash
+kubectl get pods
+```
+
 ### Les images docker
 Image flight-api : https://hub.docker.com/r/rimzdn/flights-api
 Image checkin-api : https://hub.docker.com/r/rimzdn/checkin-api
