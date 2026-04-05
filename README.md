@@ -72,3 +72,7 @@ kubectl port-forward deployment/flight-api 50051:50051
 cd flights-api
 python grpc_client.py
 ```
+
+### Les images docker
+Image flight-api : https://hub.docker.com/r/rimzdn/flights-api
+Image checkin-api : https://hub.docker.com/r/rimzdn/checkin-api
